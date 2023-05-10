@@ -1,21 +1,49 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {COLORS} from '../../constants';
+import {StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {COLORS, ROUTES} from '../../constants';
 
-const Home = () => {
+const Settings = ({navigation}) => {
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLORS.bgColor,
       }}>
-      <Text>Home!</Text>
-    </View>
+      <Text>This is Home Screen </Text>
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate(ROUTES.ABOUT)}
+        style={styles.button}
+        activeOpacity={0.8}>
+        <Text style={styles.buttonText}>Go to about</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate(ROUTES.LOGIN)}
+        style={styles.button}
+        activeOpacity={0.8}>
+        <Text style={styles.buttonText}>Log out</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 
-export default Home;
+export default Settings;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: COLORS.primary,
+    padding: 17,
+    margin: 10,
+    borderRadius: 5,
+    fontSize: 18,
+    width: 180,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});

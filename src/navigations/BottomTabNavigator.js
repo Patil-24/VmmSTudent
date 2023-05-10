@@ -111,6 +111,7 @@ import {Home, Wallet, Notifications, Settings} from '../screens';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SettingsNavigator from './SettingsNavigator';
 import {useNavigation} from '@react-navigation/native';
+import HomeNavigator from './HomeNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -144,9 +145,28 @@ function BottomTabNavigator() {
           return <Icon name={iconName} size={28} color={color} />;
         },
       })}>
-      <Tab.Screen name={ROUTES.HOME_TAB} component={Home} />
-      <Tab.Screen name={ROUTES.WALLET} component={Wallet} />
-      <Tab.Screen name={ROUTES.NOTIFICATIONS} component={Notifications} />
+      <Tab.Screen name={ROUTES.HOME_TAB} component={HomeNavigator}
+       options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({color, size, focused}) => (
+          <Icon name={focused ? 'home' : 'home-outline'} size={28} color={color} />
+        ),
+        headerShown: true,
+        title: 'Student',
+        headerLeft: () => {
+          return (
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+              <Icon
+                name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu'}
+                size={30}
+                color={COLORS.dark}
+                style={{marginLeft: 20}}
+              />
+            </TouchableOpacity>
+          );
+        },
+      }}
+       />
       <Tab.Screen
         name={ROUTES.SETTINGS_NAVIGATOR}
         component={SettingsNavigator}
@@ -156,22 +176,27 @@ function BottomTabNavigator() {
             <Icon name={focused ? 'settings' : 'settings-outline'} size={28} color={color} />
           ),
           headerShown: true,
-          title: 'Settings',
-          headerRight: () => {
+          title: 'Student',
+          headerLeft: () => {
             return (
               <TouchableOpacity onPress={() => navigation.openDrawer()}>
                 <Icon
                   name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu'}
                   size={30}
                   color={COLORS.dark}
-                  style={{marginRight: 10}}
+                  style={{marginLeft: 20}}
                 />
               </TouchableOpacity>
             );
           },
         }}
       />
+      <Tab.Screen name={ROUTES.WALLET} component={Wallet} />
+      <Tab.Screen name={ROUTES.NOTIFICATIONS} component={Notifications} />
+      
+      
     </Tab.Navigator>
+    
   );
 }
 

@@ -1,11 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, SafeAreaView} from 'react-native';
-
+import {StyleSheet, Text, View} from 'react-native';
+import {COLORS} from '../../constants';
 const Profile = () => {
   return (
-    <SafeAreaView>
-      <Text>Profile</Text>
-    </SafeAreaView>
+    <View
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: COLORS.bgColor,
+    }}>
+    <Text>Profile</Text>
+  </View>
   );
 };
 
